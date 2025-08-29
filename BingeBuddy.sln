@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingeBuddy.Maui", "BingeBuddy.Maui\BingeBuddy.Maui.csproj", "{0F84DA4D-8428-4745-8395-422936BB5349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingeBuddy.Shared", "BingeBuddy.Shared\BingeBuddy.Shared.csproj", "{60AFC962-5667-4274-A2BC-02733C77AB93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingeBuddy.Web", "BingeBuddy.Web\BingeBuddy.Web.csproj", "{A090099B-B0B8-4EC3-8BE1-CF7F8A29A9C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F84DA4D-8428-4745-8395-422936BB5349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F84DA4D-8428-4745-8395-422936BB5349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F84DA4D-8428-4745-8395-422936BB5349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F84DA4D-8428-4745-8395-422936BB5349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60AFC962-5667-4274-A2BC-02733C77AB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AFC962-5667-4274-A2BC-02733C77AB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AFC962-5667-4274-A2BC-02733C77AB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AFC962-5667-4274-A2BC-02733C77AB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A090099B-B0B8-4EC3-8BE1-CF7F8A29A9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A090099B-B0B8-4EC3-8BE1-CF7F8A29A9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A090099B-B0B8-4EC3-8BE1-CF7F8A29A9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A090099B-B0B8-4EC3-8BE1-CF7F8A29A9C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
