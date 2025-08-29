@@ -19,7 +19,7 @@ For Android:
 dotnet build -t:Run -f net9.0-android
 ```    
 
-## COmmands to run web version:
+## Commands to run web version:
 
 #### In the BingeBuddy.Web directory run:
 ```
