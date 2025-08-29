@@ -1,0 +1,6 @@
+@BingeBuddy.API_HostAddress = http://localhost:5137
+
+GET {{BingeBuddy.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
