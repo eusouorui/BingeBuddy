@@ -1,51 +1,63 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using BingeBuddy.API.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
-builder.Services.AddControllers();
+// Add controllers with global authorization policy
+builder.Services.AddControllers(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+    config.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// JWT Authentication configuration
-var key = Encoding.ASCII.GetBytes("YourSuperSecretKeyHere"); // Replace with a secure key
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(options =>
-    {
-        options.RequireHttpsMetadata = false; // true in production
-        options.SaveToken = true;
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,      // set to true in production
-            ValidateAudience = false,    // set to true in production
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key)
-        };
-    });
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// Swagger for development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        c.RoutePrefix = "swagger"; // Serve at /swagger/
+        c.RoutePrefix = "swagger";
     });
 }
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); // <-- Add authentication middleware
+// Middleware to validate API key
+app.Use(async (context, next) =>
+{
+    // Skip Swagger
+    if (context.Request.Path.StartsWithSegments("/swagger"))
+    {
+        await next();
+        return;
+    }
+
+    // Check for header "X-API-KEY"
+    if (!context.Request.Headers.TryGetValue("X-API-KEY", out var extractedApiKey))
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("API Key is missing");
+        return;
+    }
+
+    if (extractedApiKey != Auth.ApiKey)
+    {
+        context.Response.StatusCode = 403;
+        await context.Response.WriteAsync("Invalid API Key");
+        return;
+    }
+
+    await next();
+});
+
 app.UseAuthorization();
 
 app.MapControllers();
